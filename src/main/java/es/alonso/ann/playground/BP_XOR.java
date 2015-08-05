@@ -35,6 +35,13 @@ public class BP_XOR {
 	 */
 	public static double XOR_IDEAL[][] = { { 0.0 }, { 1.0 }, { 1.0 }, { 0.0 } };
  
+	// The training set works this way
+	// XOR_INPUT	XOR_IDEAL
+	// 0	0		0
+	// 0	1		1
+	// 1	0		1
+	// 1	1		0
+	
 	/**
 	 * The main method.
 	 * @param args No arguments are used.
@@ -44,7 +51,8 @@ public class BP_XOR {
 		// create a neural network, without using a factory
 		BasicNetwork network = new BasicNetwork();
 		network.addLayer(new BasicLayer(null,true,2));
-		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,3));
+		// Sigmoid activation functions goes from 0 to 1
+		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,4));
 		network.addLayer(new BasicLayer(new ActivationSigmoid(),false,1));
 		network.getStructure().finalizeStructure();
 		network.reset();

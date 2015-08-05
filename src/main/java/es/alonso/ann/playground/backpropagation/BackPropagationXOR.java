@@ -1,4 +1,4 @@
-package es.alonso.ann.playground;
+package es.alonso.ann.playground.backpropagation;
 
 import org.encog.Encog;
 import org.encog.engine.network.activation.ActivationSigmoid;
@@ -22,7 +22,7 @@ import org.encog.neural.networks.training.propagation.resilient.ResilientPropaga
  * the XORFactory example.
  * 
  */
-public class BP_XOR {
+public class BackPropagationXOR {
 
 	/**
 	 * The input necessary for XOR.

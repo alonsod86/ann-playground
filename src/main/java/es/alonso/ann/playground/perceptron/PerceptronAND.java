@@ -1,4 +1,4 @@
-package es.alonso.ann.playground;
+package es.alonso.ann.playground.perceptron;
 
 import org.encog.Encog;
 import org.encog.engine.network.activation.ActivationSigmoid;
@@ -11,7 +11,7 @@ import org.encog.util.simple.EncogUtility;
 /**
  * AND: Using a basic multi-layer perceptron calculates the result of the AND operator
  */
-public class PERCEPTRON_AND {
+public class PerceptronAND {
 	/**
 	 * The input necessary for XOR.
 	 */

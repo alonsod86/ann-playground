@@ -23,55 +23,61 @@ import org.encog.neural.networks.training.propagation.resilient.ResilientPropaga
  * 
  */
 public class BP_XOR {
- 
+
 	/**
 	 * The input necessary for XOR.
 	 */
 	public static double XOR_INPUT[][] = { { 0.0, 0.0 }, { 1.0, 0.0 },
-			{ 0.0, 1.0 }, { 1.0, 1.0 } };
- 
+		{ 0.0, 1.0 }, { 1.0, 1.0 } };
+
 	/**
 	 * The ideal data necessary for XOR.
 	 */
 	public static double XOR_IDEAL[][] = { { 0.0 }, { 1.0 }, { 1.0 }, { 0.0 } };
- 
+
 	// The training set works this way
 	// XOR_INPUT	XOR_IDEAL
 	// 0	0		0
 	// 0	1		1
 	// 1	0		1
 	// 1	1		0
-	
+
 	/**
 	 * The main method.
 	 * @param args No arguments are used.
 	 */
 	public static void main(final String args[]) {
- 
+
 		// create a neural network, without using a factory
 		BasicNetwork network = new BasicNetwork();
+		// The following code creates a simple feedforward neural network for use with the XOR Operator. 
+		// You should notice that the input layer has no activation function, but has bias. 
+		// This is because there is no previous layer for the activation function to apply to. 
+		// The output layer has an activation function and no bias. This is because there is no "next layer" for the bias to connect to. 
+		// The activation function is applied to data leaving the layer. The bias neuron is connected to the next layer.
+
 		network.addLayer(new BasicLayer(null,true,2));
 		// Sigmoid activation functions goes from 0 to 1
 		network.addLayer(new BasicLayer(new ActivationSigmoid(),true,4));
 		network.addLayer(new BasicLayer(new ActivationSigmoid(),false,1));
 		network.getStructure().finalizeStructure();
 		network.reset();
- 
+
 		// create training data
 		MLDataSet trainingSet = new BasicMLDataSet(XOR_INPUT, XOR_IDEAL);
- 
+
 		// train the neural network
 		final ResilientPropagation train = new ResilientPropagation(network, trainingSet);
- 
+
 		int epoch = 1;
- 
+
 		do {
 			train.iteration();
 			System.out.println("Epoch #" + epoch + " Error:" + train.getError());
 			epoch++;
 		} while(train.getError() > 0.01);
 		train.finishTraining();
- 
+
 		// test the neural network
 		System.out.println("Neural Network Results:");
 		for(MLDataPair pair: trainingSet ) {
@@ -79,7 +85,7 @@ public class BP_XOR {
 			System.out.println(pair.getInput().getData(0) + "," + pair.getInput().getData(1)
 					+ ", actual=" + output.getData(0) + ",ideal=" + pair.getIdeal().getData(0));
 		}
- 
+
 		Encog.getInstance().shutdown();
 	}
 }
